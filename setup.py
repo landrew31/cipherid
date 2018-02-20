@@ -8,7 +8,6 @@ setup(
 
     author_email = 'lupaandriy31@gmail.com',
     url = 'https://github.com/landrew31/cipherid',
-    download_url = 'https://github.com/peterldowns/mypackage/archive/0.1.tar.gz', # I'll explain this in a second
     keywords = ['hash', 'cipher', 'base62'],
     classifiers = [],
 )

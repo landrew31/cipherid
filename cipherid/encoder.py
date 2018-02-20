@@ -9,6 +9,14 @@ BASE = len(DIGITS)
 
 
 class BaseCoder:
+    
+    __slots__ = (
+        'alphabet',
+        'salt',
+        'base',
+        'min_length',
+    )
+
     def __init__(self, salt, base=None, alphabet=None, min_length=0):
         alphabet = alphabet if alphabet else DIGITS
         base = base if base else BASE
@@ -52,7 +60,7 @@ class BaseCoder:
     def _strip(self, coded):
         return coded.lstrip(self.alphabet[0])
 
-    def to_base(self, num):
+    def encode(self, num):
         """
         Converts integer number to appropriate base.
 
@@ -62,13 +70,13 @@ class BaseCoder:
         Examples for salt "My awesome salt"
         >>> e = BaseCoder("My awesome salt")
 
-        >>> e.to_base(1)
+        >>> e.encode(1)
         '3'
-        >>> e.to_base(3845)
+        >>> e.encode(3845)
         'i03'
-        >>> e.to_base(38415455)
+        >>> e.encode(38415455)
         'ZPjP1'
-        >>> e.to_base(38415456)
+        >>> e.encode(38415456)
         'iQ4Xj'
         """
         if not (isinstance(num, int) and num > 0):
@@ -84,7 +92,7 @@ class BaseCoder:
         return self._shift(self._ensure_min_length(
             ''.join(reversed(list(get_chars(num))))))
 
-    def from_base(self, num_str):
+    def decode(self, num_str):
         """
         Converts string that represent a number in appropriate base to integer in base 10.
 
@@ -94,13 +102,13 @@ class BaseCoder:
         Examples for salt "My awesome salt"
         >>> e = BaseCoder("My awesome salt")
 
-        >>> e.from_base('3')
+        >>> e.decode('3')
         1
-        >>> e.from_base('i03')
+        >>> e.decode('i03')
         3845
-        >>> e.from_base('ZPjP1')
+        >>> e.decode('ZPjP1')
         38415455
-        >>> e.from_base('iQ4Xj')
+        >>> e.decode('iQ4Xj')
         38415456
         """
         return sum(

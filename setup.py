@@ -2,7 +2,7 @@ from distutils.core import setup
 setup(
     name = 'cipherid',
     packages = ['cipherid'],
-    version = '0.1.0',
+    version = '0.1.1',
     description = 'Package for ciphering numbers into strings of fixed length.',
     author = 'Andriy Lupa',
 
